@@ -26,6 +26,13 @@ body{
 	margin: 0 5 auto;
 }
 
+#updownImage{
+	float: right;
+	margin: -8 5 auto;
+	height: 30px;
+	width: 30px;
+}
+
 #updown:hover{
 	background-color: #000638;
 	color: #ffffff;
