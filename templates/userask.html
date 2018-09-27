@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Questions</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+		<div class="navbar">
+				<ul>
+					<li style="float: left; color: #ffffff; padding:10px">StackOverflow-Lite</li>
+		
+					<li><a href="signin.html">Signout</a></li>
+					<li><a href="profile.html">Profile</a></li>
+					<li><a href="userask.html" class="active">Ask</a></li>
+					<li><a href="index.html">Questions</a></li>
+				
+		
+				</ul>
+			</div>
+	<form id="form" name="myForm">
+			<fieldset>
+				<legend>Ask A Question</legend>
+					<input type="text" id="questionTitle" placeholder="Title">
+					<textarea rows="10" cols="100" id="questionBody"></textarea>
+	
+					<input type="submit" value="Post" id="submit">
+			</fieldset>
+		</form>
+		<script src="../static/js/userask.js"></script>
+</body>
+</html>
