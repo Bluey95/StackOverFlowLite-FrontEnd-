@@ -53,6 +53,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
     card.appendChild(answer)
 
     data.Answers.forEach(answer => {
+
       const card = document.createElement('div');
       card.setAttribute('class', 'cardAnswer');
 
@@ -66,10 +67,33 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       const h4 = document.createElement('h4');
       h4.textContent = "Answered By " + answer.answered_by;
 
+      const h5 = document.createElement('h5');
+      h5.textContent = answer.votes + " votes";
+
       const upButton = document.createElement('img');
       upButton.setAttribute('id', 'updownImage')
       upButton.setAttribute('src', '../static/img/thumbsup.png')
       upButton.textContent = "upvote";
+      upButton.onclick = function(){
+
+
+        var p = {
+          body:answer.body
+        }
+
+        fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+question.id+'/answer/'+answer.id+'/upvote', {
+          method: 'PUT',
+          headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },body:JSON.stringify(p)
+        }).then(function(response){
+          if(response.status == 201){
+            alert("upvote successful")
+            window.location.reload();
+          }
+        })
+    }
       
 
       const downButton = document.createElement('img');
@@ -92,7 +116,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
-        }
+        },
         }).then(function(response) {
           console.log(response)
       if (response.status == 201){
@@ -147,7 +171,8 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       card.appendChild(h1);
       card.appendChild(p);
       card.appendChild(h4);
-      card.appendChild(DeleteAns)
+      card.appendChild(h5);
+      card.appendChild(DeleteAns);
       card.appendChild(upButton);
       card.appendChild(downButton);
       card.appendChild(MarkAns);
