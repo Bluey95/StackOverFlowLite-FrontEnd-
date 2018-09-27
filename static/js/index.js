@@ -44,7 +44,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
         window.location.replace("specificquestion.html")
       }
 
-      let answer = document.createElement('button');
+      const answer = document.createElement('button');
       answer.setAttribute('id', 'updown');
       answer.textContent = "Answer this question";
       answer.onclick = function(){

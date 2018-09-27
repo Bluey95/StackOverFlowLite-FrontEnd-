@@ -43,6 +43,25 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
       const viewAnswer = document.createElement('button');
       viewAnswer.setAttribute('id', 'updown')
       viewAnswer.textContent = "View Answers";
+      viewAnswer.onclick = function(){
+        window.sessionStorage.setItem('questionid', question.id)
+        window.sessionStorage.setItem('questiontitle', question.title)
+        window.sessionStorage.setItem('questionbody', question.body)
+        window.sessionStorage.setItem('askedby', question.created_by)
+        window.location.replace("specificquestion.html")
+      }
+
+      const EditQuestion = document.createElement('button');
+      EditQuestion.setAttribute('id', 'updown')
+      EditQuestion.textContent = "Edit Question";
+      EditQuestion.onclick = function(){
+        window.sessionStorage.setItem('questionid', question.id)
+        window.sessionStorage.setItem('questiontitle', question.title)
+        window.sessionStorage.setItem('questionbody', question.body)
+        window.sessionStorage.setItem('askedby', question.created_by)
+        window.location.replace("update.html")
+      }
+
 
       container.appendChild(card);
       card.appendChild(h2);
@@ -51,6 +70,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
       card.appendChild(upButton);
       card.appendChild(downButton);
       card.appendChild(viewAnswer);
+      card.appendChild(EditQuestion)
     });
   })
 
