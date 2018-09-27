@@ -112,15 +112,45 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       }
     })
     }
+
+    const DeleteAns = document.createElement('img');
+    DeleteAns.setAttribute('id', 'deleteImage')
+    DeleteAns.setAttribute('src', '../static/img/delete.jpg')
+    DeleteAns.textContent = "Delete This Answer";
+    DeleteAns.onclick = function(){
+      window.sessionStorage.setItem('questionid', question.id)
+      var questionid = window.sessionStorage.getItem('questionid')
+      window.sessionStorage.setItem('answerid', answer.id)
+      answerid = window.sessionStorage.getItem('answerid')
+      fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid+'/answer/'+answerid, {
+        method: 'DELETE',
+        mode: 'cors', 
+        headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+      }).then(function(response) {
+        console.log(response)
+    if (response.status == 200){
+        alert("Answer Deleted")
+        window.location.reload()
+    }else if(response.status == 400 || response.status == 401){
+      response.json().then(data => {
+        alert("Sorry Only The Answer Owner Can Delete The Answer")
+      })
+    }
+  })
+  }
       
 
       container.appendChild(card);
       card.appendChild(h1);
       card.appendChild(p);
       card.appendChild(h4);
+      card.appendChild(DeleteAns)
       card.appendChild(upButton);
       card.appendChild(downButton);
-      card.appendChild(MarkAns)
+      card.appendChild(MarkAns);
     })
 
 })

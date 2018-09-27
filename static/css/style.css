@@ -33,6 +33,13 @@ body{
 	width: 30px;
 }
 
+#deleteImage{
+	float: right;
+	margin: -12 5 auto;
+	height: 40px;
+	width: 40px;
+}
+
 #updown:hover{
 	background-color: #000638;
 	color: #ffffff;
@@ -75,7 +82,7 @@ body{
 	padding-bottom: 60px;
 	margin-bottom:10px; 
 	border-bottom: 1px solid #000638; 
-	height: 130px;
+	height: 160px;
 	box-shadow: 5px 8px 5px #1a1919;
 }
 
