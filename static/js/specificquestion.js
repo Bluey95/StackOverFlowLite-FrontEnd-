@@ -75,8 +75,6 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       upButton.setAttribute('src', '../static/img/thumbsup.png')
       upButton.textContent = "upvote";
       upButton.onclick = function(){
-
-
         var p = {
           body:answer.body
         }
@@ -89,17 +87,35 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
         },body:JSON.stringify(p)
         }).then(function(response){
           if(response.status == 201){
-            alert("upvote successful")
+            alert("upvote successful");
             window.location.reload();
           }
         })
-    }
+      }
       
 
       const downButton = document.createElement('img');
       downButton.setAttribute('id', 'updownImage')
       downButton.setAttribute('src', '../static/img/thumbsdown.png')
       downButton.textContent = "downvote";
+      downButton.onclick = function(){
+        var p = {
+          body:answer.body
+        }
+
+        fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+question.id+'/answer/'+answer.id+'/downvote', {
+          method: 'PUT',
+          headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },body:JSON.stringify(p)
+        }).then(function(response){
+          if(response.status == 201){
+            alert("downvote successful")
+            window.location.reload();
+          }
+        })
+      }
       
       const MarkAns = document.createElement('img');
       MarkAns.setAttribute('id', 'updownImage')
@@ -138,8 +154,8 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
     }
 
     const DeleteAns = document.createElement('img');
-    DeleteAns.setAttribute('id', 'deleteImage')
-    DeleteAns.setAttribute('src', '../static/img/delete.jpg')
+    DeleteAns.setAttribute('id', 'updownImage')
+    DeleteAns.setAttribute('src', '../static/img/delete.png')
     DeleteAns.textContent = "Delete This Answer";
     DeleteAns.onclick = function(){
       window.sessionStorage.setItem('questionid', question.id)
