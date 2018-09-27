@@ -32,14 +32,6 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
       const h4 = document.createElement('h4');
       h4.textContent = "Asked By " + question.created_by;
 
-      const upButton = document.createElement('button');
-      upButton.setAttribute('id', 'updown')
-      upButton.textContent = "upvote";
-
-      const downButton = document.createElement('button');
-      downButton.setAttribute('id', 'updown')
-      downButton.textContent = "downvote";
-
       const viewAnswer = document.createElement('button');
       viewAnswer.setAttribute('id', 'updown')
       viewAnswer.textContent = "View Answers";
@@ -53,7 +45,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
 
       const EditQuestion = document.createElement('button');
       EditQuestion.setAttribute('id', 'updown')
-      EditQuestion.textContent = "Edit Question";
+      EditQuestion.textContent = "Edit";
       EditQuestion.onclick = function(){
         window.sessionStorage.setItem('questionid', question.id)
         window.sessionStorage.setItem('questiontitle', question.title)
@@ -62,19 +54,44 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
         window.location.replace("update.html")
       }
 
+      const DeleteQuestion = document.createElement('button');
+      DeleteQuestion.setAttribute('id', 'updown')
+      DeleteQuestion.textContent = "Delete";
+      DeleteQuestion.onclick = function(){
+        window.sessionStorage.setItem('questionid', question.id)
+        questionid = window.sessionStorage.getItem('questionid')
+        fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid, {
+        method: 'DELETE',
+        mode: 'cors', 
+        redirect: 'follow',
+        headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+        }
+        }).then(function(response) {
+      if (response.status == 200){
+          response.json().then(data => {
+              alert("Successfuly Deleted")
+          },
+          window.location.replace("myquestions.html")
+      );
+      }
+    })
+  }
 
       container.appendChild(card);
       card.appendChild(h2);
       card.appendChild(p);
       card.appendChild(h4);
-      card.appendChild(upButton);
-      card.appendChild(downButton);
       card.appendChild(viewAnswer);
       card.appendChild(EditQuestion)
-    });
+      card.appendChild(DeleteQuestion)
   })
+    
+  })
+
 
   .catch(function(error) {
     console.log(error);
   });   
-
+ 
