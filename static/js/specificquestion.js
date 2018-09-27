@@ -75,27 +75,29 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       upButton.setAttribute('src', '../static/img/thumbsup.png')
       upButton.textContent = "upvote";
       upButton.onclick = function(){
-        window.sessionStorage.setItem('questionid', question.id)
-        var questionid = window.sessionStorage.getItem('questionid')
-        window.sessionStorage.setItem('answerid', answer.id)
-        answerid = window.sessionStorage.getItem('answerid')
+
+        var p = {
+          body:answer.body
+        }
 
         fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+question.id+'/answer/'+answer.id+'/upvote', {
           method: 'PUT',
           headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
-        }
+        },body:JSON.stringify(p)
         }).then(function(response) {
-          console.log("getting here")
           console.log(response)
-      if (response.status == 201){
-        alert("Successfuly Upvoted")
+          if (response.status == 201){
+            alert("Upvote Successfull");
+            window.location.reload();
+      }else if(response.status == 200 || response.status == 400){
+        response.json().then(data => {
+          alert("Sorry You Cannot Vote On Your Own Answer")
+        })
       }
     })
-    }
       
-
       const downButton = document.createElement('img');
       downButton.setAttribute('id', 'updownImage')
       downButton.setAttribute('src', '../static/img/thumbsdown.png')
@@ -116,7 +118,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
-        }
+        },
         }).then(function(response) {
           console.log(response)
       if (response.status == 201){
