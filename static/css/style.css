@@ -31,6 +31,15 @@ body{
 	color: #ffffff;
 }
 
+#answerButton{
+	float: left;
+}
+
+#answerButton:hover{
+	background-color: #000638;
+	color: #ffffff;
+}
+
 .questions{
 	background-color: #ffffff;
 	color: #000638;
@@ -40,12 +49,27 @@ body{
 .card{
 	background-color: #ffffff;
 	color: #000638;
-	padding: 40px;
+	padding: 20px;
 	padding-bottom: 60px;
 	margin-bottom:30px; 
 	border-bottom: 1px solid #000638; 
 	height: 130px;
 	box-shadow: 5px 8px 5px #1a1919;
+}
+
+#answerBody{
+	background-color: #cccedf;
+	color: #000638;
+	padding: 20px;
+	margin-bottom:30px; 
+	border: 1px solid #000638; 
+	height: 130px;
+}
+
+#answerField{
+	padding: 20px;
+	margin-bottom:30px; 
+	height: 250px;
 }
 
 
@@ -61,7 +85,6 @@ a{
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 5px 8px 5px #1a1919;
-
 }
 
 #postData{
@@ -225,4 +248,8 @@ color: #ffffff;
 .content{
 	display: none;
 	overflow: hidden;
+}
+
+#questionTitle{
+	color: white;
 }
