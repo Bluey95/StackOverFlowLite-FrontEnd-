@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
             response.json().then(data => {
                 alert("Successfuly Posted")
             },
-            // window.location.replace("index.html")
+            window.location.replace("myquestions.html")
         );
         }else if (response.status == 400 || response.status == 422 || response.status == 401){
             response.json().then(
