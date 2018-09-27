@@ -66,17 +66,20 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       const h4 = document.createElement('h4');
       h4.textContent = "Answered By " + answer.answered_by;
 
-      const upButton = document.createElement('button');
-      upButton.setAttribute('id', 'updown')
+      const upButton = document.createElement('img');
+      upButton.setAttribute('id', 'updownImage')
+      upButton.setAttribute('src', '../static/img/thumbsup.png')
       upButton.textContent = "upvote";
       
 
-      const downButton = document.createElement('button');
-      downButton.setAttribute('id', 'updown')
+      const downButton = document.createElement('img');
+      downButton.setAttribute('id', 'updownImage')
+      downButton.setAttribute('src', '../static/img/thumbsdown.png')
       downButton.textContent = "downvote";
       
-      const MarkAns = document.createElement('button');
-      MarkAns.setAttribute('id', 'updown')
+      const MarkAns = document.createElement('img');
+      MarkAns.setAttribute('id', 'updownImage')
+      MarkAns.setAttribute('src', '../static/img/accept.png')
       MarkAns.textContent = "Accept This Answer";
       MarkAns.onclick = function(){
         window.sessionStorage.setItem('questionid', question.id)
@@ -102,6 +105,10 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
               }
           }
       );
+      }else if(response.status == 200 || response.status == 400){
+        response.json().then(data => {
+          alert("Sorry Only The Question Owner Can Mark An Answer")
+        })
       }
     })
     }
