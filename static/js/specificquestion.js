@@ -76,6 +76,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       upButton.textContent = "upvote";
       upButton.onclick = function(){
 
+
         var p = {
           body:answer.body
         }
@@ -86,18 +87,15 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },body:JSON.stringify(p)
-        }).then(function(response) {
-          console.log(response)
-          if (response.status == 201){
-            alert("Upvote Successfull");
+        }).then(function(response){
+          if(response.status == 201){
+            alert("upvote successful")
             window.location.reload();
-      }else if(response.status == 200 || response.status == 400){
-        response.json().then(data => {
-          alert("Sorry You Cannot Vote On Your Own Answer")
+          }
         })
-      }
-    })
+    }
       
+
       const downButton = document.createElement('img');
       downButton.setAttribute('id', 'updownImage')
       downButton.setAttribute('src', '../static/img/thumbsdown.png')
