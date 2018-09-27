@@ -57,6 +57,10 @@ body{
 	box-shadow: 5px 8px 5px #1a1919;
 }
 
+#newColor{
+	background-color:green !important;
+  }
+
 .cardAnswer{
 	background-color: #ffffff;
 	color: #000638;

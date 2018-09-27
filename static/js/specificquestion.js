@@ -83,7 +83,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
         var questionid = window.sessionStorage.getItem('questionid')
         window.sessionStorage.setItem('answerid', answer.id)
         answerid = window.sessionStorage.getItem('answerid')
-        fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid+'/answer'+answerid, {
+        fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid+'/answer/'+answerid, {
           method: 'PUT',
           mode: 'cors', 
           headers: {
@@ -94,9 +94,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           console.log(response)
       if (response.status == 201){
           response.json().then(data => {
-              alert("Accepted")
-          },
-          window.location.replace("myquestions.html")
+              acceptedData = data.response.is_accepted
+              if (acceptedData == "true"){
+                window.sessionStorage.setItem('color', card.setAttribute("id", "newColor"));
+                window.onload = window.sessionStorage.getItem('color');
+
+              }
+          }
       );
       }
     })
