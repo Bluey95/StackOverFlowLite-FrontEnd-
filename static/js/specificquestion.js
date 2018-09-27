@@ -69,10 +69,39 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       const upButton = document.createElement('button');
       upButton.setAttribute('id', 'updown')
       upButton.textContent = "upvote";
+      
 
       const downButton = document.createElement('button');
       downButton.setAttribute('id', 'updown')
       downButton.textContent = "downvote";
+      
+      const MarkAns = document.createElement('button');
+      MarkAns.setAttribute('id', 'updown')
+      MarkAns.textContent = "Accept This Answer";
+      MarkAns.onclick = function(){
+        window.sessionStorage.setItem('questionid', question.id)
+        var questionid = window.sessionStorage.getItem('questionid')
+        window.sessionStorage.setItem('answerid', answer.id)
+        answerid = window.sessionStorage.getItem('answerid')
+        fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid+'/answer'+answerid, {
+          method: 'PUT',
+          mode: 'cors', 
+          headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+        }).then(function(response) {
+          console.log(response)
+      if (response.status == 201){
+          response.json().then(data => {
+              alert("Accepted")
+          },
+          window.location.replace("myquestions.html")
+      );
+      }
+    })
+    }
+      
 
       container.appendChild(card);
       card.appendChild(h1);
@@ -80,6 +109,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       card.appendChild(h4);
       card.appendChild(upButton);
       card.appendChild(downButton);
+      card.appendChild(MarkAns)
     })
 
 })
