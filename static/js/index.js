@@ -33,20 +33,19 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       const h4 = document.createElement('h4');
       h4.textContent = "Asked By " + question.created_by;
 
-      const upButton = document.createElement('button');
-      upButton.setAttribute('id', 'updown')
-      upButton.textContent = "upvote";
-
-      const downButton = document.createElement('button');
-      downButton.setAttribute('id', 'updown')
-      downButton.textContent = "downvote";
-
       const viewAnswer = document.createElement('button');
       viewAnswer.setAttribute('id', 'updown')
       viewAnswer.textContent = "View Answers";
+      viewAnswer.onclick = function(){
+        window.sessionStorage.setItem('questionid', question.id)
+        window.sessionStorage.setItem('questiontitle', question.title)
+        window.sessionStorage.setItem('questionbody', question.body)
+        window.sessionStorage.setItem('askedby', question.created_by)
+        window.location.replace("specificquestion.html")
+      }
 
       let answer = document.createElement('button');
-      answer.setAttribute('id', 'answerButton');
+      answer.setAttribute('id', 'updown');
       answer.textContent = "Answer this question";
       answer.onclick = function(){
         window.sessionStorage.setItem('questionid', question.id)
@@ -59,8 +58,6 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       card.appendChild(h2);
       card.appendChild(p);
       card.appendChild(h4);
-      card.appendChild(upButton);
-      card.appendChild(downButton);
       card.appendChild(viewAnswer);
       card.appendChild(answer)
 

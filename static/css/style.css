@@ -57,6 +57,17 @@ body{
 	box-shadow: 5px 8px 5px #1a1919;
 }
 
+.cardAnswer{
+	background-color: #ffffff;
+	color: #000638;
+	padding: 20px;
+	padding-bottom: 60px;
+	margin-bottom:10px; 
+	border-bottom: 1px solid #000638; 
+	height: 130px;
+	box-shadow: 5px 8px 5px #1a1919;
+}
+
 #answerBody{
 	background-color: #cccedf;
 	color: #000638;
