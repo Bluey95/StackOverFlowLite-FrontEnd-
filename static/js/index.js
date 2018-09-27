@@ -19,6 +19,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
     data.Questions.forEach(question => {
+
       const card = document.createElement('div');
       card.setAttribute('class', 'card');
 
@@ -44,6 +45,16 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       viewAnswer.setAttribute('id', 'updown')
       viewAnswer.textContent = "View Answers";
 
+      let answer = document.createElement('button');
+      answer.setAttribute('id', 'answerButton');
+      answer.textContent = "Answer this question";
+      answer.onclick = function(){
+        window.sessionStorage.setItem('questionid', question.id)
+        window.sessionStorage.setItem('questiontitle', question.title)
+        window.sessionStorage.setItem('questionbody', question.body)
+        window.location.replace("answer.html")
+      }
+
       container.appendChild(card);
       card.appendChild(h2);
       card.appendChild(p);
@@ -51,8 +62,12 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       card.appendChild(upButton);
       card.appendChild(downButton);
       card.appendChild(viewAnswer);
+      card.appendChild(answer)
+
     });
   })
+
+  
 
   .catch(function(error) {
     console.log(error);
