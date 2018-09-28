@@ -89,6 +89,8 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           if(response.status == 201){
             alert("upvote successful");
             window.location.reload();
+          }else if(response.status == 200){
+            alert("Pssst.....Are you really trying to upvote your own answer?")
           }
         })
       }
