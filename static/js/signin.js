@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 let token = (data.Access_token).substring(2, (data.Access_token).length -1); 
                 alert(token);
                 window.sessionStorage.setItem('token', token);},
-            window.location.replace("./templates/index.html"));
+            window.location.replace("index.html"));
         }else if (response.status == 400 || response.status == 422 || response.status == 401){
             response.json().then(
                 data => 
