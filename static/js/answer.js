@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("getting here", response);
         if (response.status == 201){
             response.json().then(data => {
-                alert("Successfuly Posted")
+                alert("Your Answer Has Been Successfuly Posted")
             },
-            window.location.replace("myquestions.html")
+            window.location.replace("specificquestion.html")
         );
         }else if (response.status == 400 || response.status == 422 || response.status == 401){
             response.json().then(
