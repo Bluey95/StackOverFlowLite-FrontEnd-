@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (data.hasOwnProperty(key)) {
                         arr.push( [ key, data[key] ] );
                     }
-                }alert(data[key]); window.location.reload(true);});
+                }alert(data[key]);});
         }
         else{
         //failed
