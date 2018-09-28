@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }).then(function(response) {
         if (response.status == 201){
             response.json().then(data => {
+                window.sessionStorage.setItem('username', p.username)
                 let token = (data.Access_token).substring(2, (data.Access_token).length -1); 
                 alert(token);
                 window.sessionStorage.setItem('token', token);window.location.replace("index.html")},
