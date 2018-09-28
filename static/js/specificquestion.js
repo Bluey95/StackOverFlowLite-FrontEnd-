@@ -115,6 +115,8 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           if(response.status == 201){
             alert("downvote successful")
             window.location.reload();
+          }else if(response.status == 200){
+            alert("Pssst.....Are you really trying to downvote your own answer?")
           }
         })
       }
