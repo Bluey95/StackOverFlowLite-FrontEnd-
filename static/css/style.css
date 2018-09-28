@@ -24,6 +24,7 @@ body{
 #updown{
 	float: right;
 	margin: 0 5 auto;
+	box-shadow: 3px 5px 3px #3b3a3a;
 }
 
 #updownImage{
