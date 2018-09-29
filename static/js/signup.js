@@ -1,3 +1,8 @@
+$(window).on('load', function(){
+    // Animate loader off screen
+    $('.loader').delay(3200).fadeOut('slow');
+  });
+
 document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("submit");
     button.onclick = function(){
@@ -27,26 +32,44 @@ document.addEventListener("DOMContentLoaded", function() {
         if (response.status == 201){
             response.json().then(data => example(data));
             alert("You have been successfuly Registered. Please Login To Continue");
-            window.location.replace("signin.html")
+            swal(
+                { title: "Success!!", 
+                text: "You have been successfuly Registered. Please Login To Continue", 
+                type: "success" }).then(function(){
+                    window.location.replace("signin.html");
+            });
         }else if (response.status == 400 || response.status == 422){
             response.json().then(
                 data => 
-                { var arr = [];
-
+                { 
+                var arr = [];
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
                         arr.push( [ key, data[key] ] );
                     }
-                }alert(data[key]); window.location.reload(true);});
+                }
+                swal(
+                    { title: "Sorry", 
+                    text: (data[key]), 
+                    type: "info" }).then(function(){
+                        window.location.reload(true);
+                });
+            });
         }
         else{
-        //failed
-        response.json().then(data => console.log("Failed: ", data));
-        }
-        }).catch(err => console.log(err));
-        function example(data){
-            //execute some statements
-            console.log(JSON.stringify(data));
+            //failed
+            response.json().then(data => 
+                swal(
+                    { title: "Failed", 
+                    text: data, 
+                    type: "info" }),
+            )}
+            }).catch(err => console.log(err));
+            function example(data){
+                swal(
+                    { title: "Failed", 
+                    text: data, 
+                    type: "info" });
         }
         return false;
     }

@@ -1,3 +1,8 @@
+$(window).on('load', function(){
+  // Animate loader off screen
+  $('.loader').delay(3200).fadeOut('slow');
+});
+
 const app = document.getElementById('root');
 
 const container = document.createElement('div');
@@ -87,10 +92,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
         },body:JSON.stringify(p)
         }).then(function(response){
           if(response.status == 201){
-            alert("upvote successful");
-            window.location.reload();
+            swal({ title: "Nice!!", text: "upvote successful", type: "success" }).then(function(){
+              window.location.reload();
+          });
           }else if(response.status == 200){
-            alert("Pssst.....Are you really trying to upvote your own answer?")
+            swal({ title: "Pssst.....", text: "Are you really trying to upvote your own answer?", type: "info", button: "Lets Go Back" }).then(function(){
+              window.location.reload();
+          });
           }
         })
       }
@@ -113,10 +121,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
         },body:JSON.stringify(p)
         }).then(function(response){
           if(response.status == 201){
-            alert("downvote successful")
-            window.location.reload();
+            swal({ title: "Oh Well", text: "downvote successful", type: "success" }).then(function(){
+              window.location.reload();
+          });
           }else if(response.status == 200){
-            alert("Pssst.....Are you really trying to downvote your own answer?")
+            swal({ title: "Pssst.....", text: "Are you really trying to downvote your own answer?", type: "info", button: "Lets Go Back"}).then(function(){
+              window.location.reload();
+          });
           }
         })
       }
@@ -151,7 +162,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       );
       }else if(response.status == 200 || response.status == 400){
         response.json().then(data => {
-          alert("Sorry Only The Question Owner Can Mark An Answer")
+          swal({ title: "Sorry", text: "Only The Question Owner Can Mark An Answer", type: "info", button: "Lets Go Back"});
         })
       }
     })
@@ -176,11 +187,12 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       }).then(function(response) {
         console.log(response)
     if (response.status == 200){
-        alert("Answer Deleted")
-        window.location.reload()
+      swal({ title: "Answer Deleted", text: "You can always post new answers", type: "success" }).then(function(){
+        window.location.reload();
+    });
     }else if(response.status == 400 || response.status == 401){
       response.json().then(data => {
-        alert("Sorry Only The Answer Owner Can Delete The Answer")
+        swal({ title: "Sorry", text: "Only The Answer Owner Can Delete The Answer", type: "info" });
       })
     }
   })
