@@ -1,6 +1,6 @@
 $(window).on('load', function(){
     // Animate loader off screen
-    $('.loader').delay(3200).fadeOut('slow');
+    $('.loader').delay(1200).fadeOut('slow');
   });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -20,7 +20,12 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
-        document.getElementById('questions').innerHTML = data.Question.length;
+        if(data.Question.length >= 1){
+            document.getElementById('questions').innerHTML = data.Question.length;
+        }else{
+            document.getElementById('questions').innerHTML = 0;
+        }
+        
     })   
 
     fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
