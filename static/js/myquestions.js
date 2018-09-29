@@ -76,9 +76,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
         }).then(function(response) {
       if (response.status == 200){
           response.json().then(data => {
-              alert("Successfuly Deleted")
-          },
-          window.location.replace("myquestions.html")
+              swal(
+                { title: "Success", 
+                text: "Your Answer Has Been Successfuly Deleted", 
+                type: "success" }).then(function(){
+                  window.location.replace("myquestions.html");
+            });
+          }  
       );
       }
     })

@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
             "password":Password
         }
 
-        console.log(JSON.stringify(p))
-
         fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/auth/login', {
         method: 'POST',
         mode: 'cors', 
@@ -29,28 +27,41 @@ document.addEventListener("DOMContentLoaded", function() {
             response.json().then(data => {
                 window.sessionStorage.setItem('username', p.username)
                 let token = (data.Access_token).substring(2, (data.Access_token).length -1); 
-                alert(token);
-                window.sessionStorage.setItem('token', token);window.location.replace("index.html")},
+                window.sessionStorage.setItem('token', token);
+                window.location.replace("index.html")},
             );
         }else if (response.status == 400 || response.status == 422 || response.status == 401){
             response.json().then(
                 data => 
-                { var arr = [];
-
+                { 
+                var arr = [];
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
                         arr.push( [ key, data[key] ] );
                     }
-                }alert(data[key]); window.location.reload(true);});
+                }
+                swal(
+                    { title: "Sorry", 
+                    text: (data[key]), 
+                    type: "info" }).then(function(){
+                        window.location.reload(true);
+                });
+            });
         }
         else{
         //failed
-        response.json().then(data => console.log("Failed: ", data));
-        }
+        response.json().then(data => 
+            swal(
+                { title: "Failed", 
+                text: data, 
+                type: "info" }),
+        )}
         }).catch(err => console.log(err));
         function example(data){
-            //execute some statements
-            console.log(JSON.stringify(data));
+            swal(
+                { title: "Failed", 
+                text: data, 
+                type: "info" });
         }
         return false;
     }

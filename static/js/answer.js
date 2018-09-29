@@ -30,12 +30,12 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         body:JSON.stringify(p)
         }).then(function(response) {
-            console.log("getting here", response);
         if (response.status == 201){
             response.json().then(data => {
-                alert("Your Answer Has Been Successfuly Posted")
-            },
-            window.location.replace("specificquestion.html")
+                swal({ title: "Success", text: "Your Answer Has Been Successfuly Posted", type: "success" }).then(function(){
+                    window.location.replace("specificquestion.html");
+                });
+            }   
         );
         }else if (response.status == 400 || response.status == 422 || response.status == 401){
             response.json().then(
@@ -46,16 +46,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (data.hasOwnProperty(key)) {
                         arr.push( [ key, data[key] ] );
                     }
-                }alert(data[key]); window.location.reload(true);});
+                }
+                swal({ title: "Sorry", text: (data[key]), type: "info" }).then(function(){
+                    window.location.reload(true);
+                });
+             ;});
         }
         else{
         //failed
-        response.json().then(data => console.log("Failed: ", data));
+        response.json().then(data => 
+            swal({ title: "Failed", text: data, type: "info" }));
         }
         }).catch(err => console.log(err));
         function example(data){
-            //execute some statements
-            console.log(JSON.stringify(data));
+            swal({ title: "Failed", text: data, type: "info" });
         }
         return false;
     }

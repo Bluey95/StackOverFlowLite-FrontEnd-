@@ -23,7 +23,6 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
   })
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
-    console.log(data)
     data.Questions.forEach(question => {
 
       const card = document.createElement('div');
@@ -53,7 +52,6 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
         .then(function(data) {
             h5.textContent = data.Answers.length + " Answers"
             if(data.Answers.length >= 1){
-              console.log(data.Answers.length)
               card.appendChild(viewAnswer);
             }
         })

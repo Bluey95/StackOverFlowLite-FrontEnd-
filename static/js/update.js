@@ -5,8 +5,6 @@ $(window).on('load', function(){
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    alert(sessionStorage.getItem('questiontitle'))
-
     document.getElementById('question-title').innerHTML = sessionStorage.getItem('questiontitle');
     document.getElementById('question-body').innerHTML = sessionStorage.getItem('questionbody');
     
@@ -36,9 +34,13 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("getting here", response);
         if (response.status == 201){
             response.json().then(data => {
-                alert("Successfuly Updated")
+                swal(
+                    { title: "Success!!!", 
+                    text: "Question Successfuly Updated", 
+                    type: "successs" }).then(function(){
+                        window.location.replace("specificquestion.html");
+                });
             },
-            window.location.replace("myquestions.html")
         );
         }else if (response.status == 400 || response.status == 422 || response.status == 401){
             response.json().then(
@@ -49,18 +51,31 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (data.hasOwnProperty(key)) {
                         arr.push( [ key, data[key] ] );
                     }
-                }alert(data[key]); window.location.reload(true);});
+                }
+                swal(
+                    { title: "Sorry", 
+                    text: (data[key]), 
+                    type: "info" }).then(function(){
+                        window.location.reload(true);
+                });
+            });
         }
         else{
-        //failed
-        response.json().then(data => console.log("Failed: ", data));
-        }
-        }).catch(err => console.log(err));
-        function example(data){
-            //execute some statements
-            console.log(JSON.stringify(data));
-        }
-        return false;
+            //failed
+            response.json().then(data => 
+                swal(
+                    { title: "Failed", 
+                    text: data, 
+                    type: "info" }),
+            )}
+            }).catch(err => console.log(err));
+            function example(data){
+                swal(
+                    { title: "Failed", 
+                    text: data, 
+                    type: "info" });
+            }
+        return false;;
     }
 }) 
 
