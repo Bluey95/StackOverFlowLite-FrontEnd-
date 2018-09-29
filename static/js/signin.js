@@ -1,3 +1,8 @@
+$(window).on('load', function(){
+    // Animate loader off screen
+    $('.loader').delay(3200).fadeOut('slow');
+  });
+
 document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("submit");
     button.onclick = function(){
