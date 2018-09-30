@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }).then(function(response) {
         if (response.status == 201){
             response.json().then(data => {
-                swal({ title: "Success", text: "Your Answer Has Been Successfuly Posted", type: "success" }).then(function(){
+                swal({ title: "Success", text: "Your Answer Has Been Successfuly Posted", icon: "success" }).then(function(){
                     window.location.replace("specificquestion.html");
                 });
             }   
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         arr.push( [ key, data[key] ] );
                     }
                 }
-                swal({ title: "Sorry", text: (data[key]), type: "info" }).then(function(){
+                swal({ title: "Sorry", text: (data[key]), icon: "info" }).then(function(){
                     window.location.reload(true);
                 });
              ;});
@@ -55,11 +55,11 @@ document.addEventListener("DOMContentLoaded", function() {
         else{
         //failed
         response.json().then(data => 
-            swal({ title: "Failed", text: data, type: "info" }));
+            swal({ title: "Failed", text: data, icon: "info" }));
         }
         }).catch(err => console.log(err));
         function example(data){
-            swal({ title: "Failed", text: data, type: "info" });
+            swal({ title: "Failed", text: data, icon: "info" });
         }
         return false;
     }
