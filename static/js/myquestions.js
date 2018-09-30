@@ -82,7 +82,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
           response.json().then(data => {
               swal(
                 { title: "Success", 
-                text: "Your Answer Has Been Successfuly Deleted", 
+                text: "Your Question Has Been Successfuly Deleted", 
                 icon: "success" }).then(function(){
                   window.location.replace("myquestions.html");
             });
