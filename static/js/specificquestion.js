@@ -130,7 +130,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
               window.location.reload();
           });
           }else if(response.status == 200){
-            swal({ title: "Pssst.....", text: "Are you really trying to downvote your own answer?", icon: "info", button: "Lets Go Back"}).then(function(){
+            swal({ title: "Pssst.....", text: "You are either trying to downvote your own answer (sad) or the votes arre at minimum", icon: "info", button: "Lets Go Back"}).then(function(){
               window.location.reload();
           });
           }
