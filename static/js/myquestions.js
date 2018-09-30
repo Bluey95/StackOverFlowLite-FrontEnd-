@@ -23,6 +23,10 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
   })
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
+    var a = data.Questions.sort(function(a, b){
+      return a.id - b.id;
+    });
+    a.reverse();
     data.Question.forEach(question => {
       const card = document.createElement('div');
       card.setAttribute('class', 'card');
@@ -78,8 +82,8 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
           response.json().then(data => {
               swal(
                 { title: "Success", 
-                text: "Your Answer Has Been Successfuly Deleted", 
-                type: "success" }).then(function(){
+                text: "Your Question Has Been Successfuly Deleted", 
+                icon: "success" }).then(function(){
                   window.location.replace("myquestions.html");
             });
           }  

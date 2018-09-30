@@ -30,13 +30,13 @@ document.addEventListener("DOMContentLoaded", function() {
         body:JSON.stringify(p)
         }).then(function(response) {
         if (response.status == 201){
-            response.json().then(data => example(data));
-            alert("You have been successfuly Registered. Please Login To Continue");
-            swal(
-                { title: "Success!!", 
-                text: "You have been successfuly Registered. Please Login To Continue", 
-                type: "success" }).then(function(){
-                    window.location.replace("signin.html");
+            response.json().then(data => {
+                swal(
+                    { title: "Success!!", 
+                      text: data.message, 
+                      icon: "success" }).then(function(){
+                        window.location.replace("signin.html")
+                      })
             });
         }else if (response.status == 400 || response.status == 422){
             response.json().then(
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 swal(
                     { title: "Sorry", 
                     text: (data[key]), 
-                    type: "info" }).then(function(){
+                    icon: "info" }).then(function(){
                         window.location.reload(true);
                 });
             });
@@ -62,14 +62,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 swal(
                     { title: "Failed", 
                     text: data, 
-                    type: "info" }),
+                    icon: "info" }),
             )}
             }).catch(err => console.log(err));
             function example(data){
                 swal(
                     { title: "Failed", 
                     text: data, 
-                    type: "info" });
+                    icon: "info" });
         }
         return false;
     }

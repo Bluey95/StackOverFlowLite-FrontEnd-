@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 swal(
                     { title: "Sorry", 
                     text: (data[key]), 
-                    type: "info" }).then(function(){
+                    icon: "info" }).then(function(){
                         window.location.reload(true);
                 });
             });
@@ -54,14 +54,14 @@ document.addEventListener("DOMContentLoaded", function() {
             swal(
                 { title: "Failed", 
                 text: data, 
-                type: "info" }),
+                icon: "info" }),
         )}
         }).catch(err => console.log(err));
         function example(data){
             swal(
                 { title: "Failed", 
                 text: data, 
-                type: "info" });
+                icon: "info" });
         }
         return false;
     }
