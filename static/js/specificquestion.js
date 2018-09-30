@@ -126,13 +126,17 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
         },body:JSON.stringify(p)
         }).then(function(response){
           if(response.status == 201){
-            swal({ title: "Oh Well", text: "downvote successful", icon: "success" }).then(function(){
-              window.location.reload();
-          });
+            response.json().then(data => {
+              swal({ title: "Oh Well", text: data.message, icon: "success" }).then(function(){
+                window.location.reload();
+            });
+            })
           }else if(response.status == 200){
-            swal({ title: "Pssst.....", text: "Are you really trying to downvote your own answer?", icon: "info", button: "Lets Go Back"}).then(function(){
-              window.location.reload();
-          });
+            response.json().then(data => {
+              swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back"}).then(function(){
+                window.location.reload();
+            });
+            })
           }
         })
       }
