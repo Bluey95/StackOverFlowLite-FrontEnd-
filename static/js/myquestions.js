@@ -23,7 +23,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
   })
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
-    var a = data.Questions.sort(function(a, b){
+    var a = data.Question.sort(function(a, b){
       return a.id - b.id;
     });
     a.reverse();
