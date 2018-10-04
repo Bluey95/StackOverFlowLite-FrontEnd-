@@ -101,9 +101,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
               window.location.reload();
           });
           }else if(response.status == 200){
-            swal({ title: "Pssst.....", text: "Are you really trying to upvote your own answer?", icon: "info", button: "Lets Go Back" }).then(function(){
-              window.location.reload();
-          });
+            swal({ title: "Pssst.....", text: "Are you really trying to upvote your own answer?", icon: "info", button: "Lets Go Back" })
           }
         })
       }
@@ -133,9 +131,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
             })
           }else if(response.status == 200){
             response.json().then(data => {
-              swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back"}).then(function(){
-                window.location.reload();
-            });
+              swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back"})
             })
           }
         })

@@ -24,7 +24,6 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/mostanswers", 
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
     data.Questions.forEach(question => {
-      console.log(question.question_id)
       const card = document.createElement('div');
       card.setAttribute('class', 'card');
 
