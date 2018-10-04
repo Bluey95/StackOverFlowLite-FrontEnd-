@@ -23,8 +23,14 @@
 		</ul>
 	</div>
 	<div class="maindiv">
-		<h2 style="text-align: right">Most Answered Questions</h2>
-
+		<div id="custom-select" style="width:200px; height:100px; float: right;">
+			<h5>Sort Questions</h5>
+			<select name="Select" id="custom-select" onchange="if (this.value) window.location.href=this.value">
+			  <option value="index.html">Recently Asked Questions</option>
+			  <option value="mostanswers.html">Most Answered Questions</option>
+			</select>
+		</div>
+		
 		<h1 style="text-align: center">Recently Asked Questions</h1>
 
 		<div id="root"></div>
