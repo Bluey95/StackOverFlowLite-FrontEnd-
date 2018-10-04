@@ -87,7 +87,7 @@ body{
 }
 
 #newColor{
-	background-color:green !important;
+	background-color: #B0E0E6 !important;
   }
 
 .cardAnswer{
@@ -294,5 +294,5 @@ color: #ffffff;
 }
 
 #questionTitle{
-	color: white;
+	color: #ffffff;
 }

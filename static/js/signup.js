@@ -51,9 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 swal(
                     { title: "Sorry", 
                     text: (data[key]), 
-                    icon: "info" }).then(function(){
-                        window.location.reload(true);
-                });
+                    icon: "info" })
             });
         }
         else{
