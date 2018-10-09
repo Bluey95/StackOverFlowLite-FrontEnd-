@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>StackOverflow-Lite</title>
+	<title>StackOverFlow</title>
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -11,30 +11,40 @@
 <div class="loader"></div>
 <body>
 		<div class="navbar">
-				<ul>
-					<li style="float: left; color: #ffffff; padding:10px">StackOverflow-Lite</li>
-		
-					<li><a href="signin.html">Log in</a></li>
-					<li><a href="profile.html">Profile</a></li>
-					<li><a href="userask.html">Ask</a></li>
-					<li><a href="myquestions.html">My Questions</a></li>
-					<li><a href="index.html">All Questions</a></li>
+				<div class="navbar">
+						<ul id="navbar_ul">
+							<li style="float: left; color: #ffffff; padding:10px">StackOverflow-Lite</li>
 				
-		
-				</ul>
+							<li id="navbar_li"><a href="signup.html">Log In</a></li>
+									<li id="navbar_li"><a href="profile.html">Profile</a></li>
+									<li id="navbar_li"><a href="userask.html">Ask</a></li>
+									<li id="navbar_li"><a href="myquestions.html">My Questions</a></li>
+									<li id="navbar_li"><a href="index.html" >All Questions</a></li>
+						
+				
+						</ul>
+					</div>
 			</div>
-	<form id="form" name="myForm">
-			<fieldset>
-                <legend>Answer This Question</legend>
-                    <h2 style="text-align: center">
-                        Title: <span id="question-title"></span>
-                    </h2>
-                    <h4 style="text-align: center">Question:  <span id="question-body"></span></h4>
-					<textarea rows="10" cols="100" id="answerbody"></textarea>
+
+		<div class="form" style="margin-top: 150px">
+				<div class="tab-content">
+					<form>
+						<fieldset>
+								<legend>Answer This Question</legend>
 	
-					<input type="submit" value="Post" id="submit">
-			</fieldset>
-		</form>
+								<div class="field-wrap">
+								Title: <span id="question-title"></span>
+								</div>
+							
+								<div class="field-wrap">
+								<textarea required autocomplete="off" style="height:100px" id="answerBody"></textarea>
+								</div>
+						
+							<button class="button button-block" id="submit"/>Post Answer</button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
 		<script src="../static/js/answer.js"></script>
 </body>
 </html>

@@ -3,6 +3,17 @@ $(window).on('load', function(){
   $('.loader').delay(1200).fadeOut('slow');
 });
 
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar_ul").style.top = "0";
+  } else {
+    document.getElementById("navbar_ul").style.top = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+}
+
 const app = document.getElementById('root');
 
 const container = document.createElement('div');
@@ -36,6 +47,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       h2.textContent = question.title;
 
       const p = document.createElement('p');
+      p.setAttribute('class', 'p');
       question.body = question.body.substring(0, 300);
       p.textContent = `${question.body}...`;
 
