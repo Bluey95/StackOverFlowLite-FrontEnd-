@@ -32,8 +32,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
   Authorization: `Bearer ${token}`
   },
   })
-  .then((resp) => resp.json()) // Transform the data into json
-  .then(function(data) {
+  .then(function(response){
+    response.json().then(data => {
+      if(response.status == 401){
+      swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+        window.location.replace('signup.html');
+    });
+    }
     var a = data.Questions.sort(function(a, b){
       return a.id - b.id;
     });
@@ -109,4 +114,4 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
   .catch(function(error) {
     console.log(error);
   });   
-
+  })

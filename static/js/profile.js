@@ -18,8 +18,13 @@ document.addEventListener("DOMContentLoaded", function() {
     Authorization: `Bearer ${token}`
     },
     })
-    .then((resp) => resp.json()) // Transform the data into json
-    .then(function(data) {
+    .then(function(response){
+        response.json().then(data => {
+          if(response.status == 401){
+          swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+            window.location.replace('signup.html');
+        });
+        }
         if(data.Question != null){
         if(data.Question.length >= 1){
             document.getElementById('questions').innerHTML = data.Question.length;
@@ -87,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 })
 
-
+})
 
 
 
