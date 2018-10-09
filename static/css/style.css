@@ -298,6 +298,20 @@ body{
 	color: grey;
 }
 
+#question-body{
+	overflow: scroll;
+	word-break: break-all;
+	white-space: normal;
+	width: 100%;
+}
+
+#question-title{
+	overflow: scroll;
+	word-break: break-all;
+	white-space: normal;
+	width: 100%;
+}
+
 #newColor{
 	background-color: #3e7a6d !important;
 	color: #ffffff
