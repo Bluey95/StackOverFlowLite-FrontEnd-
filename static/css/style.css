@@ -283,11 +283,12 @@ body{
 	padding-bottom: 60px;
 	margin-bottom:30px; 
 	border-bottom: 1px solid #000638; 
-	height: 200px;
-	overflow: auto;
+	height: 300px;
 	box-shadow: 5px 8px 5px #1a1919;
 	width: 100%;
 	border-radius: 4px;
+	overflow: -moz-scrollbars-vertical; 
+	overflow-y: scroll !important;
 }
 
 .p{
@@ -298,22 +299,18 @@ body{
 	color: grey;
 }
 
-#question-body{
-	overflow: scroll;
-	word-break: break-all;
-	white-space: normal;
-	width: 100%;
-}
 
-#question-title{
+.pAns{
 	overflow: scroll;
 	word-break: break-all;
 	white-space: normal;
 	width: 100%;
+	font-size: 30px;
+	color: grey;
 }
 
 #newColor{
-	background-color: #3e7a6d !important;
+	background-color: #658b1d !important;
 	color: #ffffff
   }
 
@@ -326,15 +323,16 @@ body{
 	padding-bottom: 60px;
 	margin-bottom:10px; 
 	border-bottom: 1px solid #000638; 
-	height: 200px;
+	height: 300px;
 	overflow: auto;
 	box-shadow: 5px 8px 5px #1a1919;
 	width: 100%;
 	border-radius: 4px;
+	overflow-y: scroll;
 }
 
 #answerBody{
-	color: #ffffff;
+	color: #000638;
 	padding: 20px;
 	margin-bottom:30px; 
 	border: 1px solid #000638; 

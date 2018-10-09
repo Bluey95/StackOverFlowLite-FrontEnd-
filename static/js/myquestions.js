@@ -3,6 +3,7 @@ $(window).on('load', function(){
   $('.loader').delay(1200).fadeOut('slow');
 });
 
+
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
@@ -40,6 +41,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
     });
     a.reverse();
     data.Question.forEach(question => {
+      console.log(data.Question.length)
       const card = document.createElement('div');
       card.setAttribute('class', 'card');
 
