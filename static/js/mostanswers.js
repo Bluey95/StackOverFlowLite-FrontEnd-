@@ -23,7 +23,7 @@ app.appendChild(container);
 
 const token = window.sessionStorage.getItem('token');
 
-fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
+fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/mostanswers", {
   method: 'GET',
   mode: 'cors', 
   redirect: 'follow',
@@ -34,29 +34,24 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
   })
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
-    var a = data.Questions.sort(function(a, b){
-      return a.id - b.id;
-    });
-    a.reverse();
     data.Questions.forEach(question => {
-
       const card = document.createElement('div');
       card.setAttribute('class', 'card');
 
       const h2 = document.createElement('h2');
-      h2.textContent = question.title;
+      h2.textContent = question.question_title;
 
       const p = document.createElement('p');
       p.setAttribute('class', 'p');
-      question.body = question.body.substring(0, 300);
+      question.body = question.question_body.substring(0, 300);
       p.textContent = `${question.body}...`;
 
       const h4 = document.createElement('h4');
-      h4.textContent = "Asked By " + question.created_by;
+      h4.textContent = "Asked By " + question.asked_by;
 
       const h5 = document.createElement('h5');
 
-      fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/"+question.id, {
+      fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/"+question.question_id, {
         method: 'GET',
         mode: 'cors', 
         redirect: 'follow',
@@ -77,10 +72,10 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       viewAnswer.setAttribute('id', 'updown')
       viewAnswer.textContent = "View Answers";
       viewAnswer.onclick = function(){
-        window.sessionStorage.setItem('questionid', question.id)
-        window.sessionStorage.setItem('questiontitle', question.title)
-        window.sessionStorage.setItem('questionbody', question.body)
-        window.sessionStorage.setItem('askedby', question.created_by)
+        window.sessionStorage.setItem('questionid', question.question_id)
+        window.sessionStorage.setItem('questiontitle', question.question_title)
+        window.sessionStorage.setItem('questionbody', question.question_body)
+        window.sessionStorage.setItem('askedby', question.asked_by)
         window.location.replace("specificquestion.html")
       }
 
@@ -88,9 +83,9 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       answer.setAttribute('id', 'updown');
       answer.textContent = "Answer this question";
       answer.onclick = function(){
-        window.sessionStorage.setItem('questionid', question.id)
-        window.sessionStorage.setItem('questiontitle', question.title)
-        window.sessionStorage.setItem('questionbody', question.body)
+        window.sessionStorage.setItem('questionid', question.question_id)
+        window.sessionStorage.setItem('questiontitle', question.question_title)
+        window.sessionStorage.setItem('questionbody', question.question_body)
         window.location.replace("answer.html")
       }
 

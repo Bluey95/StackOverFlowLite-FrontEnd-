@@ -20,11 +20,13 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
+        if(data.Question != null){
         if(data.Question.length >= 1){
             document.getElementById('questions').innerHTML = data.Question.length;
-        }else{
-            document.getElementById('questions').innerHTML = 0;
         }
+    }else{
+        document.getElementById('questions').innerHTML = 0;
+    }
         
     })   
 
@@ -54,6 +56,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     answers.forEach(answer => {
                         if(answer.answered_by == window.sessionStorage.getItem('username')){
                             document.getElementById('answers').innerHTML = (answer.answered_by).length
+                        }else{
+                            document.getElementById('answers').innerHTML = "0"
                         }
                     })
 

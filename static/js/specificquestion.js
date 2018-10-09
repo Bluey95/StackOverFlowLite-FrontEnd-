@@ -3,6 +3,17 @@ $(window).on('load', function(){
   $('.loader').delay(1200).fadeOut('slow');
 });
 
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar_ul").style.top = "0";
+  } else {
+    document.getElementById("navbar_ul").style.top = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+}
+
 const app = document.getElementById('root');
 
 const container = document.createElement('div');
@@ -40,6 +51,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
     h2.textContent = window.sessionStorage.getItem("questiontitle");
 
     const p = document.createElement('p');
+    p.setAttribute('class', 'p');
     question.body = question.body.substring(0, 300);
     p.textContent = `${window.sessionStorage.getItem("questionbody")}...`;
 
@@ -63,14 +75,17 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
     card.appendChild(answer)
 
     data.Answers.forEach(answer => {
+      console.log(data)
 
       const card = document.createElement('div');
       card.setAttribute('class', 'cardAnswer');
 
       const h1 = document.createElement('h1');
+      h1.setAttribute('style', 'color: #000000;')
       h1.textContent = "Answer " + answer.id;
 
       const p = document.createElement('p');
+      p.setAttribute('class', 'pAns');
       answer.body = answer.body.substring(0, 300);
       p.textContent = `${answer.body}...`;
 
@@ -80,9 +95,9 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       const h5 = document.createElement('h5');
       h5.textContent = answer.votes + " votes";
 
-      const upButton = document.createElement('img');
-      upButton.setAttribute('id', 'updownImage')
-      upButton.setAttribute('src', '../static/img/thumbsup.png')
+      const upButton = document.createElement('button');
+      upButton.setAttribute('id', 'updown')
+      upButton.textContent = "Upvote";
       upButton.textContent = "upvote";
       upButton.onclick = function(){
         var p = {
@@ -109,10 +124,9 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       }
       
 
-      const downButton = document.createElement('img');
-      downButton.setAttribute('id', 'updownImage')
-      downButton.setAttribute('src', '../static/img/thumbsdown.png')
-      downButton.textContent = "downvote";
+      const downButton = document.createElement('button');
+      downButton.setAttribute('id', 'updown')
+      downButton.textContent = "Downvote";
       downButton.onclick = function(){
         var p = {
           body:answer.body
@@ -140,51 +154,24 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           }
         })
       }
-      
-      const MarkAns = document.createElement('img');
-      MarkAns.setAttribute('id', 'updownImage')
-      MarkAns.setAttribute('src', '../static/img/accept.png')
-      MarkAns.textContent = "Accept This Answer";
-      MarkAns.onclick = function(){
-        window.sessionStorage.setItem('questionid', question.id)
-        var questionid = window.sessionStorage.getItem('questionid')
-        window.sessionStorage.setItem('answerid', answer.id)
-        answerid = window.sessionStorage.getItem('answerid')
-        fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid+'/answer/'+answerid, {
-          method: 'PUT',
-          mode: 'cors', 
-          headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        }).then(function(response) {
-          console.log(response)
-      if (response.status == 201){
-          response.json().then(data => {
-              acceptedData = data.response.is_accepted
-              if (acceptedData == "true"){
-                window.sessionStorage.setItem('color', card.setAttribute("id", "newColor"));
-                window.onload = window.sessionStorage.getItem('color');
 
-              }
-          }
-      );
-      }else if(response.status == 200 || response.status == 400){
-        response.json().then(data => {
-          swal({ title: "Sorry", text: "Only The Question Owner Can Mark An Answer", icon: "info", button: "Lets Go Back"});
-        })
-      }
-    })
-    }
+      container.appendChild(card);
+      card.appendChild(h1);
+      card.appendChild(p);
+      card.appendChild(h4);
+      card.appendChild(h5);
+      card.appendChild(upButton);
+      card.appendChild(downButton);
 
-    const DeleteAns = document.createElement('img');
-    DeleteAns.setAttribute('id', 'updownImage')
-    DeleteAns.setAttribute('src', '../static/img/delete.png')
-    DeleteAns.textContent = "Delete This Answer";
+    if(sessionStorage.username == answer.answered_by){
+    const DeleteAns = document.createElement('button');
+    DeleteAns.setAttribute('id', 'updown')
+    DeleteAns.textContent = "Delete";
     DeleteAns.onclick = function(){
       window.sessionStorage.setItem('questionid', question.id)
       var questionid = window.sessionStorage.getItem('questionid')
       window.sessionStorage.setItem('answerid', answer.id)
+      console.log(answer)
       answerid = window.sessionStorage.getItem('answerid')
       fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid+'/answer/'+answerid, {
         method: 'DELETE',
@@ -206,17 +193,56 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
     }
   })
   }
-      
+  card.appendChild(DeleteAns);
+}
 
-      container.appendChild(card);
-      card.appendChild(h1);
-      card.appendChild(p);
-      card.appendChild(h4);
-      card.appendChild(h5);
-      card.appendChild(DeleteAns);
-      card.appendChild(upButton);
-      card.appendChild(downButton);
-      card.appendChild(MarkAns);
+      if(sessionStorage.username == sessionStorage.askedby){
+        const MarkAns = document.createElement('button');
+        MarkAns.setAttribute('id', 'updown')
+        MarkAns.textContent = "Accept Answer";
+        MarkAns.onclick = function(){
+          window.sessionStorage.setItem('questionid', question.id)
+          var questionid = window.sessionStorage.getItem('questionid')
+          window.sessionStorage.setItem('answerid', answer.id)
+          answerid = window.sessionStorage.getItem('answerid')
+          fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid+'/answer/'+answerid, {
+            method: 'PUT',
+            mode: 'cors', 
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          }).then(function(response) {
+            console.log(response)
+        if (response.status == 201){
+            response.json().then(data => {
+                acceptedData = data.response.is_accepted
+                if (acceptedData == "true"){
+                  card.appendChild(MarkAnsButton)
+                  card.removeChild(MarkAns)
+                }
+            }
+        );
+        }else if(response.status == 200 || response.status == 400){
+          response.json().then(data => {
+            swal({ title: "Sorry", text: "Only The Question Owner Can Mark An Answer", icon: "info", button: "Lets Go Back"});
+          })
+        }
+      })
+      }
+      if (answer.is_accepted != "true"){
+        card.appendChild(MarkAns);
+      }
+    }
+
+    const MarkAnsButton = document.createElement('img');
+      MarkAnsButton.setAttribute('id', 'updownImage');
+      MarkAnsButton.setAttribute('src', '../static/img/accept.png');
+      console.log(answer.is_accepted)
+      if(answer.is_accepted == "true"){
+        console.log("getting here")
+         card.appendChild(MarkAnsButton)
+      }
     })
 
 })
@@ -224,4 +250,3 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
 .catch(function(error) {
 console.log(error);
 });   
-

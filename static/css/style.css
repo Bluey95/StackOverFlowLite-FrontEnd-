@@ -11,13 +11,183 @@
     filter: alpha(opacity=50);
 }
 
+*, *:before, *:after {
+	box-sizing: border-box;
+  }
+  
+  html {
+	overflow-y: scroll;
+  }
+  
+  a {
+	text-decoration: none;
+	color: #1ab188;
+	transition: .5s ease;
+  }
+  a:hover {
+	color: #179b77;
+  }
+  
+  .form {
+	background: #1d2b31;
+	padding: 40px;
+	max-width: 600px;
+	margin: 100px auto;
+	border-radius: 4px;
+	box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+  }
+  
+  .tab-group {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 40px 0;
+  }
+  .tab-group:after {
+	content: "";
+	display: table;
+	clear: both;
+  }
+  .tab-group li a {
+	display: block;
+	text-decoration: none;
+	padding: 15px;
+	background: rgba(160, 179, 176, 0.25);
+	color: #a0b3b0;
+	font-size: 20px;
+	float: left;
+	width: 50%;
+	text-align: center;
+	cursor: pointer;
+	transition: .5s ease;
+  }
+  .tab-group li a:hover {
+	background: #86ac41;
+	color: #ffffff;
+  }
+  .tab-group .active a {
+	background: #3e7a6d;
+	color: #ffffff;
+  }
+  
+  .tab-content > div:last-child {
+	display: none;
+  }
+  
+  h1 {
+	text-align: center;
+	color: #ffffff;
+	font-weight: 300;
+	margin: 0 0 40px;
+  }
+  
+  label {
+	position: absolute;
+	-webkit-transform: translateY(6px);
+			transform: translateY(6px);
+	left: 13px;
+	color: rgba(255, 255, 255, 0.5);
+	transition: all 0.25s ease;
+	-webkit-backface-visibility: hidden;
+	pointer-events: none;
+	font-size: 22px;
+  }
+  label .req {
+	margin: 2px;
+	color: #1ab188;
+  }
+  
+  label.active {
+	-webkit-transform: translateY(50px);
+			transform: translateY(50px);
+	left: 2px;
+	font-size: 14px;
+  }
+  label.active .req {
+	opacity: 0;
+  }
+  
+  label.highlight {
+	color: #ffffff;
+  }
+  
+  input, textarea {
+	font-size: 22px;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 5px 10px;
+	background: none;
+	background-image: none;
+	border: 1px solid #a0b3b0;
+	color: #ffffff;
+	border-radius: 0;
+	transition: border-color .25s ease, box-shadow .25s ease;
+  }
+  input:focus, textarea:focus {
+	outline: 0;
+	border-color: #86ac41;
+  }
+  
+  textarea {
+	border: 2px solid #a0b3b0;
+	resize: vertical;
+  }
+  
+  .field-wrap {
+	position: relative;
+	margin-bottom: 40px;
+  }
+  
+  .top-row:after {
+	content: "";
+	display: table;
+	clear: both;
+  }
+  .top-row > div {
+	float: left;
+	width: 48%;
+	margin-right: 4%;
+  }
+  .top-row > div:last-child {
+	margin: 0;
+  }
+  
+  .button {
+	border: 0;
+	outline: none;
+	border-radius: 0;
+	padding: 15px 0;
+	font-size: 2rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: .1em;
+	background: #86ac41;
+	color: #ffffff;
+	transition: all 0.5s ease;
+	-webkit-appearance: none;
+  }
+  .button:hover, .button:focus {
+	background: #3e7a6d;
+  }
+  
+  .button-block {
+	display: block;
+	width: 100%;
+  }
+  
+  .forgot {
+	margin-top: -20px;
+	text-align: right;
+  }
+  
+
 
 body{
 	margin: 0;
 	padding: 0;
-	color: #ffffff;
-	background-image: url('../img/bg.jpeg');
-	/* background-color: #cccedf; */
+	color: #cccedf;
+	/* background-image: url('../img/bg.jpeg'); */
+	background-color: #7DA3A1;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -25,10 +195,35 @@ body{
 	background-attachment: fixed;
 }
 
-.container{
-	margin: 20 150 auto;
-} 
+#navbar_ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #000000;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	transition: top 0.3s;
+}
 
+#navbar_li{
+	display: inline;
+	float: right;
+}
+
+#navbar_li a{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+#navbar_li a:hover{
+	background-color: #ffffff;
+	color: #000638;
+}
 
 
 .selections{
@@ -39,6 +234,8 @@ body{
 	float: right;
 	margin: 0 5 auto;
 	box-shadow: 3px 5px 3px #3b3a3a;
+	background: #3e7a6d;
+	color: #ffffff;
 }
 
 #updownImage{
@@ -56,16 +253,18 @@ body{
 }
 
 #updown:hover{
-	background-color: #000638;
+	background-color: #86ac41;
 	color: #ffffff;
 }
 
 #answerButton{
 	float: left;
+	background: #3e7a6d;
+	color: #ffffff;
 }
 
 #answerButton:hover{
-	background-color: #000638;
+	background-color: #86ac41;
 	color: #ffffff;
 }
 
@@ -76,6 +275,8 @@ body{
 }
 
 .card{
+	display: block;
+	margin: 0 auto;
 	background-color: #ffffff;
 	color: #000638;
 	padding: 20px;
@@ -84,13 +285,38 @@ body{
 	border-bottom: 1px solid #000638; 
 	height: 300px;
 	box-shadow: 5px 8px 5px #1a1919;
+	width: 100%;
+	border-radius: 4px;
+	overflow: -moz-scrollbars-vertical; 
+	overflow-y: scroll !important;
+}
+
+.p{
+	overflow: scroll;
+	word-break: break-all;
+	white-space: normal;
+	width: 100%;
+	color: grey;
+}
+
+
+.pAns{
+	overflow: scroll;
+	word-break: break-all;
+	white-space: normal;
+	width: 100%;
+	font-size: 30px;
+	color: grey;
 }
 
 #newColor{
-	background-color:green !important;
+	background-color: #658b1d !important;
+	color: #ffffff
   }
 
 .cardAnswer{
+	display: block;
+	margin: 0 auto;
 	background-color: #ffffff;
 	color: #000638;
 	padding: 20px;
@@ -98,7 +324,11 @@ body{
 	margin-bottom:10px; 
 	border-bottom: 1px solid #000638; 
 	height: 300px;
+	overflow: auto;
 	box-shadow: 5px 8px 5px #1a1919;
+	width: 100%;
+	border-radius: 4px;
+	overflow-y: scroll;
 }
 
 #answerBody{
@@ -141,16 +371,6 @@ a{
 
 }
 
-input{
-	width: 100%;
-	padding: 12px 20px;
-	margin: 6px 0;
-	display: inline-block;
-	border: 1px solid #000638;
-	border-radius: 4px;
-	box-sizing: border-box;
-}
-
 fieldset{
 	padding: 20px;
 	margin-top: 20px;
@@ -160,15 +380,6 @@ legend{
 	color: #ffffff;
 }
 
-input[type=submit]{
-	width: 30%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #000638;
-	border-radius: 4px;
-	box-sizing: border-box;
-}
 
 textarea{
 	width: 100%;
@@ -176,7 +387,6 @@ textarea{
 
 .maindiv{
 	margin-top: 20px;
-	background-color: hsla(240, 100%, 25%, 0.1);
 	padding: 20px;
 }
 
@@ -212,48 +422,6 @@ th{
 .navbar{
 	margin: 0;
 	padding: 0;
-}
-
-ul{
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #000638;
-	position: fixed;
-	top: 0;
-	width: 100%;
-}
-
-li{
-	display: inline;
-	float: right;
-}
-
-li a{
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-
-li a:hover{
-	background-color: #ffffff;
-	color: #000638;
-}
-
-#submit{
-	background-color: #ffffff;
-}
-
-#submit:hover{
-	background-color: #0d9fe2;
-}
-
-.active{
-	background-color: #cccedf;
-	color:#000638;
 }
 
 .user{
@@ -293,6 +461,72 @@ color: #ffffff;
 	overflow: hidden;
 }
 
-#questionTitle{
-	color: white;
+.custom-select {
+	position: relative;
+	font-family: Arial;
+  }
+  .custom-select select {
+	display: none; /*hide original SELECT element:*/
+  }
+  .select-selected {
+	background-color: DodgerBlue;
+  }
+  /*style the arrow inside the select element:*/
+  .select-selected:after {
+	position: absolute;
+	content: "";
+	top: 14px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-color: #fff transparent transparent transparent;
+  }
+  /*point the arrow upwards when the select box is open (active):*/
+  .select-selected.select-arrow-active:after {
+	border-color: transparent transparent #fff transparent;
+	top: 7px;
+  }
+  /*style the items (options), including the selected item:*/
+  .select-items div,.select-selected {
+	color: #ffffff;
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+	cursor: pointer;
+  }
+  /*style items (options):*/
+  .select-items {
+	position: absolute;
+	background-color: DodgerBlue;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 99;
+  }
+  /*hide the items when the select box is closed:*/
+  .select-hide {
+	display: none;
+  }
+  .select-items div:hover, .same-as-selected {
+	background-color: rgba(0, 0, 0, 0.1);
+  }
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.card{
+		width:100%;
+	}
+}
+  /* Large devices (desktops, 992px and up */
+@media only screen and (min-width: 992px) {
+	.card{
+		width:60%;
+	}
+	.cardAnswer{
+		width:60%;
+	}
+}
+  /* // Extra large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }
