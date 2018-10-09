@@ -305,7 +305,7 @@ body{
 	width: 100%;
 }
 
-#answerbody{
+#question-title{
 	overflow: scroll;
 	word-break: break-all;
 	white-space: normal;
