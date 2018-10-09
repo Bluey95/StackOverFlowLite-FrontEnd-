@@ -47,6 +47,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
       h2.textContent = question.title;
 
       const p = document.createElement('p');
+      p.setAttribute('class', 'p')
       question.body = question.body.substring(0, 300);
       p.textContent = `${question.body}...`;
 
