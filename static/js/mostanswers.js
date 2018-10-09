@@ -32,8 +32,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/mostanswers", 
   Authorization: `Bearer ${token}`
   },
   })
-  .then((resp) => resp.json()) // Transform the data into json
-  .then(function(data) {
+  .then(function(response){
+    response.json().then(data => {
+      if(response.status == 401){
+      swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+        window.location.replace('signup.html');
+    });
+    }
     data.Questions.forEach(question => {
       const card = document.createElement('div');
       card.setAttribute('class', 'card');
@@ -105,3 +110,4 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/mostanswers", 
     console.log(error);
   });   
 
+  })

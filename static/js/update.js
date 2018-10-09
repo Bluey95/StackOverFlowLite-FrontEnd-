@@ -32,6 +32,11 @@ document.addEventListener("DOMContentLoaded", function() {
         body:JSON.stringify(p)
         }).then(function(response) {
             console.log("getting here", response);
+        if(response.status == 401){
+            swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+                window.location.replace('signup.html');
+                });
+            }
         if (response.status == 201){
             response.json().then(data => {
                 swal(

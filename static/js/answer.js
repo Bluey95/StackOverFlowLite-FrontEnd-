@@ -30,6 +30,11 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         body:JSON.stringify(p)
         }).then(function(response) {
+        if(response.status == 401){
+            swal({ title: "Sorry", text: "Please Log In To Continue", icon: "info" }).then(function(){
+                window.location.replace('signup.html');
+            });
+        }
         if (response.status == 201){
             response.json().then(data => {
                 swal({ title: "Success", text: "Your Answer Has Been Successfuly Posted", icon: "success" }).then(function(){
