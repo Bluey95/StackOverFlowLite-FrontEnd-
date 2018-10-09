@@ -1,15 +1,64 @@
 $(window).on('load', function(){
-    // Animate loader off screen
     $('.loader').delay(1200).fadeOut('slow');
   });
+  
+
+  $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+  
+    var $this = $(this),
+        label = $this.prev('label');
+  
+        if (e.type === 'keyup') {
+              if ($this.val() === '') {
+            label.removeClass('active highlight');
+          } else {
+            label.addClass('active highlight');
+          }
+      } else if (e.type === 'blur') {
+          if( $this.val() === '' ) {
+              label.removeClass('active highlight'); 
+              } else {
+              label.removeClass('highlight');   
+              }   
+      } else if (e.type === 'focus') {
+        
+        if( $this.val() === '' ) {
+              label.removeClass('highlight'); 
+              } 
+        else if( $this.val() !== '' ) {
+              label.addClass('highlight');
+              }
+      }
+  
+  });
+  
+  $('.tab a').on('click', function (e) {
+    
+    e.preventDefault();
+    
+    $(this).parent().addClass('active');
+    $(this).parent().siblings().removeClass('active');
+    
+    target = $(this).attr('href');
+  
+    $('.tab-content > div').not(target).hide();
+    
+    $(target).fadeIn(600);
+    
+});
 
 document.addEventListener("DOMContentLoaded", function() {
-    var button = document.getElementById("submit");
-    button.onclick = function(){
-        var Username = document.getElementById("Username").value;
-        var Email = document.getElementById("Email").value;
-        var Password = document.getElementById("Password").value;
-        var Confirmpass = document.getElementById("ConfirmPassword").value;
+    const button = document.getElementById("submit");
+    button.onclick = function myFunction(){
+        const Username = document.getElementById("Username").value;
+        const Email = document.getElementById("Email").value;
+        const Password = document.getElementById("Password").value;
+        const Confirmpass = document.getElementById("ConfirmPassword").value;
+
+        window.Username = Username;
+        window.Email = Email;
+        window.Password = Password;
+        window.Confirmpass = Confirmpass;
     
         p = {
             username:Username,
@@ -17,9 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
             password:Password,
             confirmpass:Confirmpass
         }
-
-        console.log(JSON.stringify(p))
-
+        
         fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/auth/registration', {
         method: 'POST',
         mode: 'cors', 
@@ -35,10 +82,75 @@ document.addEventListener("DOMContentLoaded", function() {
                     { title: "Success!!", 
                       text: data.message, 
                       icon: "success" }).then(function(){
-                        window.location.replace("signin.html")
+                        $("#signup").hide();
+                        $("#login").show();
                       })
             });
         }else if (response.status == 400 || response.status == 422){
+            response.json().then(data => { 
+                try {
+                    swal(
+                        { title: "Sorry", 
+                        text: data.message, 
+                        icon: "info" });
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        }
+        else{
+            //failed
+            response.json().then(data => 
+                swal(
+                    { title: "Failed", 
+                    text: data.message, 
+                    icon: "info" }),
+            )}
+            }).catch(err => console.log(err));
+            function example(data){
+                swal(
+                    { title: "Failed", 
+                    text: data.message, 
+                    icon: "info" });
+        }
+        return false;
+    }
+    window.button = button;
+    window.button.onclick = button.onclick;
+
+    const signinButton = document.getElementById("signinSubmit");
+    signinButton.onclick = function myFunction(){
+        const LoginUsername = document.getElementById("LoginUsername").value;
+        const LoginPassword = document.getElementById("LoginPassword").value;
+
+        window.LoginUsername = LoginUsername;
+        window.LoginPassword = LoginPassword;
+    
+        p = {
+            "username":LoginUsername,
+            "password":LoginPassword
+        }
+
+        console.log(p)
+
+        fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/auth/login', {
+        method: 'POST',
+        mode: 'cors', 
+        redirect: 'follow',
+        headers: new Headers({
+        'Content-Type': 'application/json'
+        }),
+        body:JSON.stringify(p)
+        }).then(function(response) {
+        if (response.status == 201){
+            response.json().then(data => {
+                console.log(data)
+                window.sessionStorage.setItem('username', p.username)
+                let token = (data.Access_token).substring(2, (data.Access_token).length -1); 
+                window.sessionStorage.setItem('token', token);
+                window.location.replace("index.html")},
+            );
+        }else if (response.status == 400 || response.status == 422 || response.status == 401){
             response.json().then(
                 data => 
                 { 
@@ -55,21 +167,23 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
         else{
-            //failed
-            response.json().then(data => 
-                swal(
-                    { title: "Failed", 
-                    text: data, 
-                    icon: "info" }),
-            )}
-            }).catch(err => console.log(err));
-            function example(data){
-                swal(
-                    { title: "Failed", 
-                    text: data, 
-                    icon: "info" });
+        //failed
+        response.json().then(data => 
+            swal(
+                { title: "Failed", 
+                text: data, 
+                icon: "info" }),
+        )}
+        }).catch(err => console.log(err));
+        function example(data){
+            swal(
+                { title: "Failed", 
+                text: data, 
+                icon: "info" });
         }
         return false;
     }
 }) 
+
+
 

@@ -3,6 +3,17 @@ $(window).on('load', function(){
   $('.loader').delay(1200).fadeOut('slow');
 });
 
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar_ul").style.top = "0";
+  } else {
+    document.getElementById("navbar_ul").style.top = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+}
+
 const app = document.getElementById('root');
 
 const container = document.createElement('div');
@@ -23,6 +34,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
   })
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
+    if(data.Questio != null){
     var a = data.Question.sort(function(a, b){
       return a.id - b.id;
     });
@@ -100,6 +112,14 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
       card.appendChild(EditQuestion)
       card.appendChild(DeleteQuestion)
   })
+}else{
+  swal(
+    { title: "Sorry", 
+    text: "You have not posted any questions yet. You can always ask.", 
+    icon: "" }).then(function(){
+      window.location.replace("userask.html");
+});
+}
     
   })
 

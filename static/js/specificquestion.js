@@ -3,6 +3,17 @@ $(window).on('load', function(){
   $('.loader').delay(1200).fadeOut('slow');
 });
 
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar_ul").style.top = "0";
+  } else {
+    document.getElementById("navbar_ul").style.top = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+}
+
 const app = document.getElementById('root');
 
 const container = document.createElement('div');
@@ -40,6 +51,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
     h2.textContent = window.sessionStorage.getItem("questiontitle");
 
     const p = document.createElement('p');
+    p.setAttribute('class', 'p');
     question.body = question.body.substring(0, 300);
     p.textContent = `${window.sessionStorage.getItem("questionbody")}...`;
 
@@ -71,6 +83,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       h1.textContent = "Answer " + answer.id;
 
       const p = document.createElement('p');
+      p.setAttribute('class', 'p');
       answer.body = answer.body.substring(0, 300);
       p.textContent = `${answer.body}...`;
 
@@ -101,7 +114,9 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
               window.location.reload();
           });
           }else if(response.status == 200){
-            swal({ title: "Pssst.....", text: "Are you really trying to upvote your own answer?", icon: "info", button: "Lets Go Back" })
+            swal({ title: "Pssst.....", text: "Are you really trying to upvote your own answer?", icon: "info", button: "Lets Go Back" }).then(function(){
+              window.location.reload();
+          });
           }
         })
       }
@@ -131,7 +146,9 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
             })
           }else if(response.status == 200){
             response.json().then(data => {
-              swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back"})
+              swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back"}).then(function(){
+                window.location.reload();
+            });
             })
           }
         })

@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>StackOverflow-Lite</title>
+	<title>Question</title>
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -10,20 +10,20 @@
 <div class="loader"></div>
 <body>
 	<div class="navbar">
-		<ul>
+		<ul id="navbar_ul">
 			<li style="float: left; color: #ffffff; padding:10px">StackOverflow-Lite</li>
 
-			<li><a href="signin.html">Log In</a></li>
-					<li><a href="profile.html">Profile</a></li>
-					<li><a href="userask.html">Ask</a></li>
-					<li><a href="myquestions.html">My Questions</a></li>
-					<li><a href="index.html" >All Questions</a></li>
+			<li id="navbar_li"><a href="signup.html">Log In</a></li>
+					<li id="navbar_li"><a href="profile.html">Profile</a></li>
+					<li id="navbar_li"><a href="userask.html">Ask</a></li>
+					<li id="navbar_li"><a href="myquestions.html">My Questions</a></li>
+					<li id="navbar_li"><a href="index.html" >All Questions</a></li>
 		
 
 		</ul>
 	</div>
 	<div class="maindiv">
-		<h1 style="text-align: center">Question</h1>
+		<h1 style="text-align: center; margin-top: 20px">Question</h1>
 		<div id="root"></div>
 	</div>
 	<script src="../static/js/specificquestion.js"></script>
