@@ -10,21 +10,17 @@
 </head>
 <div class="loader"></div>
 <body>
-		<div class="navbar">
-				<div class="navbar">
-						<ul id="navbar_ul">
-							<li style="float: left; color: #ffffff; padding:10px">StackOverflow-Lite</li>
-				
-							<li id="navbar_li" onclick="sessionStorage.removeItem('token')"><a href="signup.html">Log Out</a></li>
-							<li id="navbar_li"><a href="profile.html">Profile</a></li>
-							<li id="navbar_li"><a href="userask.html">Ask</a></li>
-							<li id="navbar_li"><a href="myquestions.html">My Questions</a></li>
-							<li id="navbar_li"><a href="index.html" >All Questions</a></li>
-						
-				
-						</ul>
-					</div>
-			</div>
+		<div class="topnav" id="myTopnav">
+				<a href="index.html">StackOverflow-Lite</a>
+				<a href="signup.html" onclick="sessionStorage.removeItem('token')" style="float:right">Log Out</a>
+				<a href="profile.html" style="float:right">Profile</a>
+				<a href="userask.html" style="float:right">Ask</a>
+				<a href="myquestions.html" style="float:right">My Questions</a>
+				<a href="index.html" style="float:right">All Questions</a>
+				<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+					<i class="fa fa-bars"></i>
+				</a>
+		</div>
 
 		<div class="form" style="margin-top: 150px">
 				<div class="tab-content">
