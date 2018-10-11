@@ -3,6 +3,16 @@ $(window).on('load', function(){
     $('.loader').delay(1200).fadeOut('slow');
   });
 
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+  }
+  
+
   $('.form').find('input, textarea').on('keyup blur focus', function (e) {
   
     var $this = $(this),
