@@ -12,19 +12,6 @@ function myFunction() {
   }
 }
 
-
-
-var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-  var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos) {
-    document.getElementById("navbar_ul").style.top = "0";
-  } else {
-    document.getElementById("navbar_ul").style.top = "-50px";
-  }
-  prevScrollpos = currentScrollPos;
-};
-
 const app = document.getElementById('root');
 
 const container = document.createElement('div');
