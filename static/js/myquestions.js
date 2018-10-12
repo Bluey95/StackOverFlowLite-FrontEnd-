@@ -23,7 +23,7 @@ window.onscroll = function() {
     document.getElementById("navbar_ul").style.top = "-50px";
   }
   prevScrollpos = currentScrollPos;
-}
+};
 
 const app = document.getElementById('root');
 
@@ -80,7 +80,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
         window.sessionStorage.setItem('questionbody', question.body)
         window.sessionStorage.setItem('askedby', question.created_by)
         window.location.replace("specificquestion.html")
-      }
+      };
 
       const EditQuestion = document.createElement('button');
       EditQuestion.setAttribute('id', 'updown')
@@ -145,4 +145,4 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
   .catch(function(error) {
     console.log(error);
   });   
-})
+});

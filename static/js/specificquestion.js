@@ -44,8 +44,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
   Authorization: `Bearer ${token}`
   },
   })
-  .then((resp) => resp.json()) // Transform the data into json
-  .then(function(data) {
+  .then(function(response){
+    response.json().then(data => {
+    if(response.status == 401){
+        swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+            window.location.replace('signup.html');
+            });
+        }
     var a = data.Answers.sort(function(a, b){
       return a.id - b.id;
     });
@@ -104,19 +109,14 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       const h4 = document.createElement('h4');
       h4.textContent = "Answered By " + answer.answered_by;
 
-      const h5 = document.createElement('h5');
-      h5.textContent = answer.votes + " votes";
-
       container.appendChild(card);
       card.appendChild(h1);
       card.appendChild(p);
       card.appendChild(h4);
-      card.appendChild(h5);
 
       const upButton = document.createElement('button');
       upButton.setAttribute('id', 'updown')
-      upButton.textContent = "Upvote";
-      upButton.textContent = "upvote";
+      upButton.textContent = answer.upvotes + " upvotes";
       upButton.onclick = function(){
         var p = {
           body:answer.body
@@ -129,15 +129,18 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           Authorization: `Bearer ${token}`
         },body:JSON.stringify(p)
         }).then(function(response){
+        if(response.status == 401){
+            swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+                window.location.replace('signup.html');
+                });
+            }
           if(response.status == 201){
             swal({ title: "Nice!!", text: "upvote successful", icon: "success" }).then(function(){
-              h5.setAttribute('id', 'myvotes')
-              answer.votes = answer.votes + 1
-              document.getElementById("myvotes").innerHTML = answer.votes + " votes";
-              card.removeChild(upButton)
+              answer.upvotes = answer.upvotes + 1
+              document.getElementById("myvotes").innerHTML = answer.upvotes + " votes";
           });
           }else if(response.status == 200){
-            swal({ title: "Pssst.....", text: "Are you really trying to upvote your own answer?", icon: "info", button: "Lets Go Back" }).then(function(){
+            swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back" }).then(function(){
               window.location.reload();
           });
           }
@@ -147,7 +150,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
 
       const downButton = document.createElement('button');
       downButton.setAttribute('id', 'updown')
-      downButton.textContent = "Downvote";
+      downButton.textContent =answer.downvotes + " downvotes";
       downButton.onclick = function(){
         var p = {
           body:answer.body
@@ -160,13 +163,15 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           Authorization: `Bearer ${token}`
         },body:JSON.stringify(p)
         }).then(function(response){
+          if(response.status == 401){
+            swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+                window.location.replace('signup.html');
+                });
+            }
           if(response.status == 201){
             response.json().then(data => {
               swal({ title: "Oh Well", text: data.message, icon: "success" }).then(function(){
-                h5.setAttribute('id', 'myvotes')
-                answer.votes = answer.votes - 1
-                document.getElementById("myvotes").innerHTML = answer.votes + " votes";
-                card.removeChild(downButton)
+                answer.downvotes = answer.downvotes - 1;
             });
             })
           }else if(response.status == 200){
@@ -201,7 +206,11 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
         Authorization: `Bearer ${token}`
       }
       }).then(function(response) {
-        console.log(response)
+        if(response.status == 401){
+          swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+              window.location.replace('signup.html');
+              });
+          }
     if (response.status == 200){
       swal({ title: "Answer Deleted", text: "You can always post new answers", icon: "success" }).then(function(){
         window.location.reload();
@@ -233,7 +242,11 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
             Authorization: `Bearer ${token}`
           },
           }).then(function(response) {
-            console.log(response)
+            if(response.status == 401){
+              swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+                  window.location.replace('signup.html');
+                  });
+              }
         if (response.status == 201){
             response.json().then(data => {
                 acceptedData = data.response.is_accepted
@@ -260,13 +273,15 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       MarkAnsButton.setAttribute('src', '../static/img/accept.png');
       console.log(answer.is_accepted)
       if(answer.is_accepted == "true"){
-        console.log("getting here")
          card.appendChild(MarkAnsButton)
       }
     })
 
 })
+ 
 
 .catch(function(error) {
 console.log(error);
-});   
+});  
+
+})
