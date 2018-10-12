@@ -38,6 +38,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/myquestions", 
     });
     }
     if(data.Question != null){
+    window.sessionStorage.setItem('number_of_questions', data.Question.length)
     var a = data.Question.sort(function(a, b){
       return a.id - b.id;
     });
