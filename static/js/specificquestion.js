@@ -117,7 +117,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
           Authorization: `Bearer ${token}`
         },body:JSON.stringify(p)
         }).then(function(response){
-        if(response.status == 401){
+        if(response.status == 401 ){
             swal({ title: "Sorry", text: "Please login to continue", icon: "info" }).then(function(){
                 window.location.replace('signup.html');
                 });
@@ -182,14 +182,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
     if(sessionStorage.username == answer.answered_by){
     window.sessionStorage.setItem('number_of_answers', answer.answered_by.length)
     const DeleteAns = document.createElement('button');
-    DeleteAns.setAttribute('id', 'updown')
+    DeleteAns.setAttribute('id', 'updown');
     DeleteAns.textContent = "Delete";
     DeleteAns.onclick = function(){
-      window.sessionStorage.setItem('questionid', question.id)
-      var questionid = window.sessionStorage.getItem('questionid')
-      window.sessionStorage.setItem('answerid', answer.id)
-      console.log(answer)
-      answerid = window.sessionStorage.getItem('answerid')
+      window.sessionStorage.setItem('questionid', question.id);
+      var questionid = window.sessionStorage.getItem('questionid');
+      window.sessionStorage.setItem('answerid', answer.id);
+      answerid = window.sessionStorage.getItem('answerid');
       fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/questions/'+questionid+'/answer/'+answerid, {
         method: 'DELETE',
         mode: 'cors', 
@@ -198,7 +197,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
         Authorization: `Bearer ${token}`
       }
       }).then(function(response) {
-        if(response.status == 401){
+        if(response.status == 401 || response.status == 404){
           swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
               window.location.replace('signup.html');
               });
