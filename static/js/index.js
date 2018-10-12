@@ -71,21 +71,23 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
 
       const h5 = document.createElement('h5');
 
-      fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/"+question.id, {
-        method: 'GET',
-        mode: 'cors', 
-        redirect: 'follow',
-        headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-        },
-        }).then((resp) => resp.json()) // Transform the data into json
-        .then(function(data) {
-            h5.textContent = data.Answers.length + " Answers"
-            if(data.Answers.length >= 1){
-              card.appendChild(viewAnswer);
-            }
-        })
+      //add answer count in back end
+
+      // fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/"+question.id, {
+      //   method: 'GET',
+      //   mode: 'cors', 
+      //   redirect: 'follow',
+      //   headers: {
+      //   'Content-Type': 'application/json',
+      //   Authorization: `Bearer ${token}`
+      //   },
+      //   }).then((resp) => resp.json()) // Transform the data into json
+      //   .then(function(data) {
+      //       h5.textContent = data.Answers.length + " Answers"
+      //       if(data.Answers.length >= 1){
+      //         card.appendChild(viewAnswer);
+      //       }
+      //   })
 
 
       const viewAnswer = document.createElement('button');
@@ -114,7 +116,8 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       card.appendChild(p);
       card.appendChild(h4);
       card.appendChild(h5);
-      card.appendChild(answer)
+      card.appendChild(viewAnswer);
+      card.appendChild(answer);
 
     });
   })

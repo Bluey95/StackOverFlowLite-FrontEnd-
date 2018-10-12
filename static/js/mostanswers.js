@@ -109,7 +109,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/mostanswers", 
       card.appendChild(p);
       card.appendChild(h4);
       card.appendChild(h5);
-      card.appendChild(answer)
+      card.appendChild(answer);
 
     });
   })
@@ -120,4 +120,4 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/mostanswers", 
     console.log(error);
   });   
 
-  })
+  });

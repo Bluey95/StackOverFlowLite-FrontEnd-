@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
             email:Email,
             password:Password,
             confirmpass:Confirmpass
-        }
+        };
         
         fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/auth/registration', {
         method: 'POST',
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
                       icon: "success" }).then(function(){
                         $("#signup").hide();
                         $("#login").show();
-                      })
+                      });
             });
         }else if (response.status == 400 || response.status == 422){
             response.json().then(data => { 
@@ -129,9 +129,9 @@ document.addEventListener("DOMContentLoaded", function() {
         p = {
             "username":LoginUsername,
             "password":LoginPassword
-        }
+        };
 
-        console.log(p)
+        console.log(p);
 
         fetch('https://stackoverflowlitev3.herokuapp.com/api/v2/auth/login', {
         method: 'POST',
