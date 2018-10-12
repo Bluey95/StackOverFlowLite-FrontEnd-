@@ -15,8 +15,21 @@ $(window).on('load', function(){
 document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById('username').innerHTML = window.sessionStorage.getItem('username');
-    document.getElementById('questions').innerHTML = window.sessionStorage.getItem('number_of_questions');
-    document.getElementById('answers').innerHTML = window.sessionStorage.getItem('number_of_answers');
+    const number_of_questions = window.sessionStorage.getItem('number_of_questions');
+    const number_of_answers = window.sessionStorage.getItem('number_of_answers');
+
+    if(number_of_questions >= 1){
+        document.getElementById('questions').innerHTML = number_of_questions;
+    }else{
+        document.getElementById('questions').innerHTML = "0";
+    }
+
+    if(number_of_answers >= 1){
+        document.getElementById('answers').innerHTML = number_of_answers;
+    }else{
+        document.getElementById('answers').innerHTML = "0";
+    }
+    
     const token = window.sessionStorage.getItem('token');  
 
     fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/auth/users", {
