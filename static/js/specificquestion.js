@@ -80,7 +80,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
     card.appendChild(answer)
 
     data.Answers.forEach(answer => {
-      console.log(data)
+      console.log(data);
 
       const card = document.createElement('div');
       card.setAttribute('class', 'cardAnswer');
@@ -126,16 +126,13 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
             response.json().then(data => {
             swal({ title: "Nice!!", text:data.message, icon: "success" })
             .then(function(){
-              answer.upvotes = answer.upvotes + 1
-              document.getElementById("myvotes").innerHTML = answer.upvotes + " votes";
+              answer.upvotes = answer.upvotes + 1;
+              window.location.reload();
           });
         });
           }else if(response.status == 200){
             response.json().then(data => {
-            swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back" })
-            .then(function(){
-              window.location.reload();
-          });
+            swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back" });
           });
         }
         });
@@ -164,19 +161,19 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
             }
           if(response.status == 201){
             response.json().then(data => {
-              swal({ title: "Oh Well", text: data.message, icon: "success" }).then(function(){
+              swal({ title: "Oh Well", text: data.message, icon: "success" })
+              .then(function(){
                 answer.downvotes = answer.downvotes - 1;
+                window.location.reload();
             });
             })
           }else if(response.status == 200){
             response.json().then(data => {
-              swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back"}).then(function(){
-                window.location.reload();
+              swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back"});
             });
-            })
           }
-        })
-      }
+        });
+      };
 
 
       card.appendChild(upButton);
