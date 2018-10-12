@@ -180,6 +180,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
       card.appendChild(downButton);
 
     if(sessionStorage.username == answer.answered_by){
+    window.sessionStorage.setItem('number_of_answers', answer.answered_by.length)
     const DeleteAns = document.createElement('button');
     DeleteAns.setAttribute('id', 'updown')
     DeleteAns.textContent = "Delete";
