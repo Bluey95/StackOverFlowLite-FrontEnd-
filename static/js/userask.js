@@ -128,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     text: data, 
                     icon: "info" });
             }
-        return false;;
+        return false;
     }
-}) 
-
+});

@@ -12,18 +12,6 @@ function myFunction() {
   }
 }
 
-
-var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-  var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos) {
-    document.getElementById("navbar_ul").style.top = "0";
-  } else {
-    document.getElementById("navbar_ul").style.top = "-50px";
-  }
-  prevScrollpos = currentScrollPos;
-}
-
 const app = document.getElementById('root');
 
 const container = document.createElement('div');
@@ -130,22 +118,28 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
         },body:JSON.stringify(p)
         }).then(function(response){
         if(response.status == 401){
-            swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+            swal({ title: "Sorry", text: "Please login to continue", icon: "info" }).then(function(){
                 window.location.replace('signup.html');
                 });
             }
           if(response.status == 201){
-            swal({ title: "Nice!!", text: "upvote successful", icon: "success" }).then(function(){
+            response.json().then(data => {
+            swal({ title: "Nice!!", text:data.message, icon: "success" })
+            .then(function(){
               answer.upvotes = answer.upvotes + 1
               document.getElementById("myvotes").innerHTML = answer.upvotes + " votes";
           });
+        });
           }else if(response.status == 200){
-            swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back" }).then(function(){
+            response.json().then(data => {
+            swal({ title: "Pssst.....", text: data.message, icon: "info", button: "Lets Go Back" })
+            .then(function(){
               window.location.reload();
           });
-          }
-        })
-      }
+          });
+        }
+        });
+      };
       
 
       const downButton = document.createElement('button');
