@@ -32,7 +32,6 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
   })
   .then(function(response){
     response.json().then(data => {
-      console,log(data)
       if(response.status == 401){
       swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
         window.location.replace('signup.html');
@@ -98,4 +97,4 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
   .catch(function(error) {
     console.log(error);
   });   
-  })
+  });
