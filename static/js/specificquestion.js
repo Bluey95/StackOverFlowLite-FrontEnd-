@@ -91,7 +91,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/" + questionid
 
       const p = document.createElement('p');
       p.setAttribute('class', 'pAns');
-      answer.body = answer.body.substring(0, 300);
+      answer.body = answer.body;
       p.textContent = `${answer.body}...`;
 
       const h4 = document.createElement('h4');
