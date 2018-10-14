@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }).then(function(response) {
             console.log("getting here", response);
         if(response.status == 401){
-            swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
+            swal({ title: "Sorry", text: "Please Log In to continue", icon: "info" }).then(function(){
                 window.location.replace('signup.html');
                 });
             }
