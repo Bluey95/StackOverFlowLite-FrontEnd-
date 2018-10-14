@@ -32,6 +32,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
   })
   .then(function(response){
     response.json().then(data => {
+      console,log(data)
       if(response.status == 401){
       swal({ title: "Sorry", text: data.message, icon: "info" }).then(function(){
         window.location.replace('signup.html');
@@ -58,25 +59,7 @@ fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions", {
       h4.textContent = "Asked By " + question.created_by;
 
       const h5 = document.createElement('h5');
-
-      //add answer count in back end
-
-      // fetch("https://stackoverflowlitev3.herokuapp.com/api/v2/questions/"+question.id, {
-      //   method: 'GET',
-      //   mode: 'cors', 
-      //   redirect: 'follow',
-      //   headers: {
-      //   'Content-Type': 'application/json',
-      //   Authorization: `Bearer ${token}`
-      //   },
-      //   }).then((resp) => resp.json()) // Transform the data into json
-      //   .then(function(data) {
-      //       h5.textContent = data.Answers.length + " Answers"
-      //       if(data.Answers.length >= 1){
-      //         card.appendChild(viewAnswer);
-      //       }
-      //   })
-
+      h5.textContent = question.no_of_answers + " Answers";
 
       const viewAnswer = document.createElement('button');
       viewAnswer.setAttribute('id', 'updown')
